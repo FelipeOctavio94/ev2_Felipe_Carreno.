@@ -11,7 +11,7 @@ export default{
     <input id="txt" type="number"/></br></br>
     <input id="dolar" type="radio" name="grupo" value="dolar">a Dolar
     <input id="uf" type="radio" name="grupo" value="uf">a UF
-    <input id="euro" type="radio" name="grupo" value="euro">a Euro
+    <input id="euro" type="radio" name="grupo" value="euro">a euro
     <br><br>
     <button onclick="calcular()">Calcular</button>
     <p id="resp"></p> 
@@ -20,15 +20,16 @@ export default{
     `,
 
     calcular: function (){
-    var peso = document.getElementById('txt');
-    var opciones = document.getElementById('grupo')
-    var grupo = "";
-    var resp = document.getElementById('resp');
+    var peso = document.getElementById("txt").value;
+    var opciones = document.getElementsByName("grupo")
+    var resp = document.getElementById("resp");
     var total = "";
+    var grupo = "";
+    
     if(peso!=""){
-        radios.forEach(item =>{
+        opciones.forEach(item =>{
             if(item.checked){
-               peso = item.value;
+               grupo = item.value;
             }
 
         });
@@ -39,8 +40,8 @@ export default{
             resp.innerHTML = "Equivale a "+total.toFixed(0)+" dolares";
             resp.style.color = "blue";
         }else if(grupo == "uf"){
-            total = peso/this.valores.uf;
-            resp.innerHTML = "Equivale a "+total.toFixed(0)+" UF";
+            total = parseInt(peso) /parseInt(this.valores.uf);
+            resp.innerHTML = "Equivale a "+total.toFixed(0)+" UF's";
             resp.style.color = "blue";
         }else if(grupo == "euro"){
             total = peso/this.valores.euro;
